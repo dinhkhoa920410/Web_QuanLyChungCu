@@ -1,0 +1,30 @@
+﻿@using Web_QuanLyChungCu.Models
+@model IEnumerable<Staff>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 20);
+}
+
+<div>
+    <h1 style="padding-bottom: 30px; "> Danh sách dịch vụ</h1>
+    @Html.ActionLink("Thêm mới", "CreateStaff", "Staff", new { @class = "btn btn-success", @style = "margin: 10px" })
+</div>
+<div class="table">
+    @grid.GetHtml(
+        tableStyle: "divTable",
+        headerStyle: "gridHead",
+        footerStyle: "gridFooter",
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAltRow",
+        columns: grid.Columns(grid.Column("Id", "ID"),
+            grid.Column("StaffIdentify", "Mã nhân viên"),
+            grid.Column("Phone", "Số điện thoại"),
+            grid.Column("Name", "Tên nhân viên"),
+            grid.Column("Address", "Địa chỉ"),
+            grid.Column("Email", "Đaiọ chỉ Email"),
+            grid.Column("Gender", "Giới tính"),
+            grid.Column( format: p => @Html.ActionLink("Chỉnh Sửa", "ModifyStaff", new {id= p.Id})),
+            grid.Column( format: p => @Html.ActionLink("Xoá", "StaffDelete", new {id = p.Id }))
+            ))
+</div>

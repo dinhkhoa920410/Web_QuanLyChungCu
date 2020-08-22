@@ -1,0 +1,31 @@
+﻿@using Web_QuanLyChungCu.Models
+@model IEnumerable<Apartment>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 20);
+}
+
+<div>
+    <h1 style="padding-bottom: 30px; "> Danh sách phòng </h1>
+    @Html.ActionLink("Thêm mới", "ApartmentCreate", "Apartment", new { @class = "btn btn-success", @style = "margin: 10px" })
+</div>
+<div class="table">
+    @grid.GetHtml(
+        tableStyle: "divTable",
+        headerStyle: "gridHead",
+        footerStyle: "gridFooter",
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAltRow",
+        columns: grid.Columns(grid.Column("Id", "ID"),
+            grid.Column("ApartmentNumber", "Mã phòng"),
+            grid.Column("floor", "Tầng"),
+            grid.Column("Square", "Diện tích thông thuỷ"),
+            grid.Column("LeadId", "Mã khách hàng"),
+            grid.Column("PaymentMethod", "Phương thức thanh toán"),
+            grid.Column("Price", "Giá"),
+            grid.Column( format: p => @Html.ActionLink("Chỉnh Sửa", "ApartmentModify", new {id= p.Id})),
+            grid.Column( format: p => @Html.ActionLink("Xoá", "ApartmentDelete", new {id = p.Id })),
+            grid.Column(format: p => @Html.ActionLink("Tạo hợp đồng thuê", "InvoiceCreate","Invoice", new { id = p.Id },""))
+            ))
+</div>

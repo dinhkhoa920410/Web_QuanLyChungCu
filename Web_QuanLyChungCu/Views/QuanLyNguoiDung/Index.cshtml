@@ -1,0 +1,34 @@
+﻿@using Web_QuanLyChungCu.Models;
+@model IEnumerable<UserInfo>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 20);}
+@*Thể hiển dữ liêu thông qua control WebGrid*@
+<div>
+    <h1 style="padding-bottom: 30px; "> Quản Lý Người Dùng</h1>
+
+    @Html.ActionLink("Tạo Mới", "TaoMoi", "QuanLyNguoiDung", new { @class = "btn btn-success", @style = "margin: 10px" })
+</div>
+<div class="table">
+    @grid.GetHtml(
+        tableStyle: "divTable",
+        headerStyle: "gridHead",
+        footerStyle: "gridFooter",
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAltRow",
+        columns: grid.Columns(grid.Column("Id", "Mã Sản Phẩm"),
+            grid.Column("Name", "Tên Người dùng"),
+            grid.Column("Code", "Mã người dùng"),
+            grid.Column("Address", "Địa chỉ"),
+            grid.Column("Phone", "Số điện thoại"),
+            grid.Column("IdNumber", "Số chứng minh nhân dân", format: p => @Html.Raw(p.IdNumber)),
+            grid.Column("Email", "Địa chỉ Email"),
+            grid.Column("Note", "Chú thích"),
+            grid.Column( format: p => @Html.ActionLink("Chỉnh Sửa","ChinhSua", new {id= p.Id})),
+            grid.Column( format: p => @Html.ActionLink("Xoá", "Xoa", new {id = p.Id }))
+            ))
+</div>
+
+
+

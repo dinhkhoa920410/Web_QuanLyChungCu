@@ -1,0 +1,59 @@
+﻿@using Web_QuanLyChungCu.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+}
+<style>
+    .form-group {
+        padding: 30px;
+    }
+</style>
+<h1> Thêm mới nhân viên</h1>
+@using (Html.BeginForm("CreateStaff", "Staff", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+<div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Mã nhân viên</label>
+        <div class="col-md-9">
+            @Html.TextBox("StaffIdentify", "", htmlAttributes: new { @placeholder = "" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Số điện thoại</label>
+        <div class="col-md-9">
+            @Html.TextBox("Phone", "", htmlAttributes: new { @placeholder = "" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Tên nhân viên</label>
+        <div class="col-md-9">
+            @Html.TextBox("Name", "", htmlAttributes: new { @placeholder = "" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Địa chỉ</label>
+        <div class="col-md-9">
+            @Html.TextBox("Address", "", htmlAttributes: new { @placeholder = "" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Địa chỉ Email</label>
+        <div class="col-md-9">
+            @Html.TextBox("Email", "", htmlAttributes: new { @placeholder = "" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Giới tính</label>
+        <div class="col-md-9">
+            @Html.TextBox("Gender", "", htmlAttributes: new { @placeholder = "" })
+        </div>
+    </div>
+</div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Thêm mới" class="btn btn-success" />
+            @Html.ActionLink("Huỷ","Index","Staff", htmlAttributes: new { @class = "btn btn-danger" })
+        </div>
+    </div>
+}

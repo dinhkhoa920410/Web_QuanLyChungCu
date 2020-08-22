@@ -1,0 +1,45 @@
+﻿@using Web_QuanLyChungCu.Models
+@model IEnumerable<Lead>
+@{
+    ViewBag.Title = "LeadDetails";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 20);
+}
+
+<div>
+    <h1 style="padding-bottom: 30px; "> Danh Sách thông tin khách hàng </h1>
+    <div class="col-md-12">
+        @Html.ActionLink("Thêm mới", "LeadCreate", "LeadDetails", new { @class = "btn btn-success col-md-2", @style = "margin-bottom: 15px" })
+        <div class="col-md-9" style="margin-right: 0px;">
+            @using (Html.BeginForm("LeadDetails", "LeadDetails", new { @enctype = "multipart/form-data" }))
+            {
+                <div class="form-group col-md-12" style="text-align:right; margin-right:0px;">
+                    <div class="col-md-12" style="text-align:right;">
+                        @Html.TextBox("sSearchLead", "", htmlAttributes: new { @placeholder = "Nhập từ khoá " })
+                        <input type="submit" value="Tìm kiếm" class="btn btn-danger" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="table">
+    @grid.GetHtml(
+        tableStyle: "divTable",
+        headerStyle: "gridHead",
+        footerStyle: "gridFooter",
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAltRow",
+        columns: grid.Columns(grid.Column("Id", "ID"),
+            grid.Column("Code", "Mã khách hàng"),
+            grid.Column("Name", "Tên khách hàng"),
+            grid.Column("Phone", "Số điện thoại"),
+            grid.Column("LeadIdentify", "Chứng minh nhân dân"),
+            grid.Column("Nationality", "Quốc tịch"),
+            grid.Column("BankBranch", "Chi nhánh ngân hàng"),
+            grid.Column("StaffId", "Mã nhân viên"),
+            grid.Column("IsActive", "Trạng thái"),
+            grid.Column( format: p => @Html.ActionLink("Chỉnh Sửa","LeadModify", new {id= p.Id})),
+            grid.Column( format: p => @Html.ActionLink("Xoá", "LeadDelete", new {id = p.Id }))
+            ))
+</div>

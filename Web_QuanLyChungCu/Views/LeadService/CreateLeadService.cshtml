@@ -1,0 +1,49 @@
+﻿@using Web_QuanLyChungCu.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+}
+<style>
+    .form-group {
+        padding: 30px;
+    }
+</style>
+<h1> Thêm mới hợp đồng</h1>
+@using (Html.BeginForm("CreateLeadService", "LeadService", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Mã hợp đồng</label>
+            <div class="col-md-9">
+                @Html.DropDownList("LeadId", (IEnumerable<SelectListItem>)ViewBag.LeadId, "Vui lòng Chọn", new { @class = "from-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Tiền đặt cọc</label>
+            <div class="col-md-9">
+                @Html.DropDownList("ServiceId", (IEnumerable<SelectListItem>)ViewBag.ServiceId, "Vui lòng Chọn", new { @class = "from-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Ngày hiệu lực</label>
+            <div class="col-md-9">
+                @Html.TextBox("StartDate", "", htmlAttributes: new { @placeholder = "Nhập ngày " })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Ngày hết hạn/label>
+            <div class="col-md-9">
+                @Html.TextBox("EndDate", "", htmlAttributes: new { @placeholder = "Nhập ngày " })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Thêm mới" class="btn btn-success" />
+        </div>
+        <div class="col-md-offset-2 col-md-10">
+            <input value="Thêm mới" class="btn btn-success" />
+        </div>
+    </div>
+}

@@ -1,0 +1,31 @@
+﻿@using Web_QuanLyChungCu.Models
+@model IEnumerable<Invoice>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 20);
+}
+
+<div>
+    <h1 style="padding-bottom: 30px; "> Danh sách hợp đồng </h1>
+    @Html.ActionLink("Thêm mới", "InvoiceCreate", "Invoice", new { @class = "btn btn-success", @style = "margin: 10px" })
+</div>
+<div class="table">
+    @grid.GetHtml(
+        tableStyle: "divTable",
+        headerStyle: "gridHead",
+        footerStyle: "gridFooter",
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAltRow",
+        columns: grid.Columns(grid.Column("Id", "ID"),
+            grid.Column("Code", "Mã hợp đồng"),
+            grid.Column("PayCash", "Tiền cọc"),
+            grid.Column("PaymentMethod", "Phương thức thanh toán"),
+            grid.Column("StaffId", "Mã Nhân viên "),
+            grid.Column("LeadId", "Mã Khách hàng"),
+            grid.Column("DateCreate", "Ngày lập hợp đồng"),
+            grid.Column("DueDate", "Ngày hết hạn"),
+            grid.Column( format: p => @Html.ActionLink("Chỉnh Sửa","InvoiceModify", new {id= p.Id})),
+            grid.Column( format: p => @Html.ActionLink("Xoá", "InvoiceDelete", new {id = p.Id }))
+            ))
+</div>

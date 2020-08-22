@@ -1,0 +1,28 @@
+﻿@using Web_QuanLyChungCu.Models
+@model IEnumerable<LeadService>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 20);
+}
+
+<div>
+    <h1 style="padding-bottom: 30px; "> Danh sách dịch vụ</h1>
+    @Html.ActionLink("Thêm mới", "CreateLeadService", "LeadService", new { @class = "btn btn-success", @style = "margin: 10px" })
+</div>
+<div class="table">
+    @grid.GetHtml(
+        tableStyle: "divTable",
+        headerStyle: "gridHead",
+        footerStyle: "gridFooter",
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAltRow",
+        columns: grid.Columns(grid.Column("Id", "ID"),
+            grid.Column("LeadId", "Khách hàng"),
+            grid.Column("ServiceId", "Dịch vụ"),
+            grid.Column("StartDate", "Ngày hiệu lực"),
+            grid.Column("EndDate", "Ngày hết hạn"),
+            grid.Column( format: p => @Html.ActionLink("Chỉnh Sửa", "ModifyLeadService", new {id= p.Id})),
+            grid.Column( format: p => @Html.ActionLink("Xoá", "LeadServiceDelete", new {id = p.Id }))
+            ))
+</div>

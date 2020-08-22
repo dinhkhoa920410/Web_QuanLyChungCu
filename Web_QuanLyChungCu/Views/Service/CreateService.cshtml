@@ -1,0 +1,47 @@
+﻿@using Web_QuanLyChungCu.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+}
+<style>
+    .form-group {
+        padding: 30px;
+    }
+</style>
+<h1> Thêm mới hợp đồng</h1>
+@using (Html.BeginForm("CreateService", "Service", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Mã dịch vụ</label>
+            <div class="col-md-9">
+                @Html.TextBox("Code", "", htmlAttributes: new { @placeholder = "Nhập ngày " })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Tên dịch vụ</label>
+            <div class="col-md-9">
+                @Html.TextBox("Name", "", htmlAttributes: new { @placeholder = "Nhập ngày " })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Giá dịch vụ</label>
+            <div class="col-md-9">
+                @Html.TextBox("Price", "", htmlAttributes: new { @placeholder = "Nhập ngày " })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Hình thức thanh toán</label>
+                <div class="col-md-9">
+                    @Html.TextBox("PaymentMethod", "", htmlAttributes: new { @placeholder = "Nhập ngày " })
+                </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Thêm mới" class="btn btn-success" />
+            <input value="Huỷ" class="btn btn-success" />
+        </div>
+    </div>
+}

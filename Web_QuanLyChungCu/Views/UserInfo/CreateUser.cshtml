@@ -1,0 +1,91 @@
+﻿@using Web_QuanLyChungCu.Models
+@model UserInfo
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<style>
+    #Position {
+         width: 100%; 
+         height: 40px;
+    }
+</style>
+</head>
+<div class="col-md-10">
+    <div class=" register">
+        <h1>Tạo mới tài khoản người dùng</h1>
+        <form ng-app="" name="userForm" action="CreateUser" method="post">
+            <div class="col-md-6 register-top-grid register-bottom-grid">
+                <h3>Thông Tin Cá Nhân</h3>
+                <div>
+                    <span>Tên Nhân Viên</span>
+                    <input type="text" ng-model="Name" name="Name" ng-required="true" ng-minlength="2" ng-maxlength="30">
+                    @*<span style="color:red;" class="error" ng-show="userForm.Name.$touched && userForm.Name.$error.required">Tên không được để trống</span>
+                    <span style="color:red;" ng-show="userForm.Name.$error.minlength">words must be more than 2</span>
+                    <span style="color:red;" ng-show="userForm.Name.$error.maxlength">words must be less than 20</span>*@
+                </div>
+                <div>
+                    <span>Mã Nhân Viên</span>
+                    <input type="text" ng-model="Code" name="Code" ng-required="true" ng-minlength="2" ng-maxlength="30">
+                    @*<span style="color:red;" class="error" ng-show="userForm.Code.$touched && userForm.Code.$error.required">Tên không được để trống</span>
+                    <span style="color:red;" ng-show="userForm.Code.$error.minlength">words must be more than 2</span>
+                    <span style="color:red;" ng-show="userForm.Code.$error.maxlength">words must be less than 20</span>*@
+                </div>
+                <div>
+                    <span>Địa Chỉ</span>
+                    <input type="text" ng-model="DiaChi" name="Address" ng-required="true" ng-minlength="2" ng-maxlength="30">
+                    @*<span style="color:red;" class="error" ng-show="userForm.Address.$touched && userForm.Address.$error.required">Vui lòng không bỏ trống</span>*@
+                </div>
+                <div>
+                    <span>Địa Chỉ Email</span>
+                    <input id="email" type="email" ng-model="Email" name="Email" ng-required="true">
+                    @*<span style="color:red;" class="error" ng-show="userForm.Email.$touched && userForm.Email.$error.required">Vui lòng không bỏ trống</span>*@
+                    @*<span style="color:red;" ng-show="userForm.Email.$error.email"> Định dạng Email không đúng </span>*@
+                </div>
+                <div>
+                    <span>CMND/PASSPORT</span>
+                    <input id="email" type="text" ng-model="IdNumber" name="IdNumber" ng-required="true">
+                    @*<span style="color:red;" class="error" ng-show="userForm.IdNumber.$touched && userForm.IdNumber.$error.required">Vui lòng không bỏ trống</span>*@
+                    @*<span style="color:red;" ng-show="userForm.IdNumber.$error.email"> Định dạng Email không đúng </span>*@
+                </div>
+               <div>
+                   <span>Chức vụ</span>
+                    <div >
+                        @Html.DropDownList("Position", (IEnumerable<SelectListItem>)ViewBag.Position, "Vui lòng Chọn", new { @class = "from-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 register-bottom-grid register-top-grid">
+                <h3>THông Tin Đăng Nhập</h3>
+                <div>
+                    <span>Tài Khoản</span>
+                    <input type="text" ng-model="UserName" name="UserName" ng-required="true" ng-minlength="2" ng-maxlength="30">
+                    @*<span style="color:red;" class="error" ng-show="userForm.UserName.$touched && userForm.UserName.$error.required">Tài khoản không được để trống</span>
+                    <span style="color:red;" ng-show="userForm.UserName.$error.minlength">words must be more than 2</span>
+                    <span style="color:red;" ng-show="userForm.UserName.$error.maxlength">words must be less than 20</span>*@
+                </div>
+                <div>
+                    <span>Mật Khẩu</span>
+                    <input type="password" name="PassWord" ng-show="!showPassword" ng-model="PassWord" ng-required="true">
+                    <input type="text" name="plainPassword" ng-show="showPassword" ng-model="PassWord" ng-required="true">
+                    @*<span style="color:red;" class="error" ng-show="userForm.PassWord.$touched && userForm.PassWord.$error.required">Vui lòng không để trống</span>*@
+                </div>
+                <div>
+                </div>
+                <div class="checkbox_custummer">
+                    <input type="checkbox" id="showPassword" ng-model="showPassword">
+                    <label class="comment" for="showPassword"> Hiển thị mật khẩu</label>
+                </div>
+
+            </div>
+            <div class=" col-md-12" style="text-align:center; padding-top: 50px;">
+                <button style="width: 350px; height:50px; font-size:20px;" type="submit" class="btn btn-success" ng-disabled="userForm.$invalid">Xác nhận</button>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+    <h1 style="color:red;">@ViewBag.ThongBao</h1>
+</div>

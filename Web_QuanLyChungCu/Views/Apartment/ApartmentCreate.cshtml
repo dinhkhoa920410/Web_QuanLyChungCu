@@ -1,0 +1,65 @@
+﻿
+@using Web_QuanLyChungCu.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+}
+<style>
+    .form-group {
+        padding: 30px;
+    }
+</style>
+<h1> Thêm mới thông tin căn hộ</h1>
+@using (Html.BeginForm("ApartmentCreate", "Apartment", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+<div>
+    <div class="form-group">
+        <label class="control-label col-md-2"> Mã căn hộ</label>
+        <div class="col-md-9">
+            @Html.TextBox("ApartmentNumber", "", htmlAttributes: new { @placeholder = "..." })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Tầng căn hộ</label>
+        <div class="col-md-9">
+            @Html.TextBox("floor", "", htmlAttributes: new { @placeholder = "..." })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Diện tích thông tầng</label>
+        <div class="col-md-9">
+            @Html.TextBox("Square", "", htmlAttributes: new { @placeholder = "..." })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Khách hàng</label>
+        <div class="col-md-9">
+            @Html.DropDownList("LeadId", (IEnumerable<SelectListItem>)ViewBag.LeadId, "Vui Lòng Chọn", new { @class = "from-control" })
+        </div>
+    </div>
+    @*<div class="form-group">
+            <label class="control-label col-md-2">Nhân viên</label>
+            <div class="col-md-9">
+                @Html.DropDownList("StaffId", (IEnumerable<SelectListItem>)ViewBag.StaffId, "Vui lòng Chọn", new { @class = "from-control" })
+            </div>
+        </div*@>
+    <div class="form-group">
+        <label class="control-label col-md-2">Giá</label>
+        <div class="col-md-9">
+            @Html.TextBox("Price", "", htmlAttributes: new { @placeholder = "..." })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Phương thức thanh toán</label>
+        <div class="col-md-9">
+            @Html.TextBox("PaymentMethod", "", htmlAttributes: new { @placeholder = "..." })
+        </div>
+    </div>
+</div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Thêm mới" class="btn btn-success" />
+        </div>
+    </div>
+}

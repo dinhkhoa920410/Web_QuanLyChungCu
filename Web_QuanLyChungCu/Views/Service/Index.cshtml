@@ -1,0 +1,28 @@
+﻿@using Web_QuanLyChungCu.Models
+@model IEnumerable<Service>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 20);
+}
+
+<div>
+    <h1 style="padding-bottom: 30px; "> Danh sách dịch vụ</h1>
+    @Html.ActionLink("Thêm mới", "CreateService", "Service", new { @class = "btn btn-success", @style = "margin: 10px" })
+</div>
+<div class="table">
+    @grid.GetHtml(
+        tableStyle: "divTable",
+        headerStyle: "gridHead",
+        footerStyle: "gridFooter",
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAltRow",
+        columns: grid.Columns(grid.Column("Id", "ID"),
+            grid.Column("Code", "Mã dịch vụ"),
+            grid.Column("Name", "Tên dịch vụ"),
+            grid.Column("Price", "giá dịch vụ"),
+            grid.Column("PaymentMethod", "Phương thức thanh toán"),
+            grid.Column( format: p => @Html.ActionLink("Chỉnh Sửa", "ModifyService", new {id= p.Id})),
+            grid.Column( format: p => @Html.ActionLink("Xoá", "ServiceDelete", new {id = p.Id }))
+            ))
+</div>
